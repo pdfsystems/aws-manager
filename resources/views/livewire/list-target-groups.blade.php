@@ -5,8 +5,8 @@
                 <ul class="space-y-2">
                     @foreach($group->targets as $target)
                         <li class="flex items-center space-x-2">
-                            <span>{{ $target->getInstanceName() }}</span>
                             <flux:icon :name="$target->getIcon()" :color="$target->getColor()" />
+                            <span>{{ $target->getInstanceName() }}</span>
                         </li>
                     @endforeach
                 </ul>
