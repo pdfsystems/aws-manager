@@ -40,11 +40,19 @@ class Target extends Model implements HasColor, HasIcon
 
     public function getIcon(): ?string
     {
-        return $this->state === TargetState::Healthy ? 'check-circle' : 'x-circle';
+        return match ($this->state) {
+            TargetState::Healthy => 'check-circle',
+            TargetState::Unhealthy => 'x-circle',
+            default => null,
+        };
     }
 
     public function getColor(): ?string
     {
-        return $this->state === TargetState::Healthy ? 'green' : 'red';
+        return match ($this->state) {
+            TargetState::Healthy => 'green',
+            TargetState::Unhealthy => 'red',
+            default => 'gray',
+        };
     }
 }
