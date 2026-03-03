@@ -13,6 +13,7 @@
     "require": {
         "php": "^8.5",
         "ext-pdo": "*",
+        "aws/aws-sdk-php-laravel": "^3.10",
         "laravel/fortify": "^1.30",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",

@@ -11,9 +11,17 @@
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
+                <!-- Platform -->
                 <flux:sidebar.group :heading="__('Platform')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                <!-- Load Balancing -->
+                <flux:sidebar.group :heading="__('Load Balancing')" class="grid">
+                    <flux:sidebar.item icon="target" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                        {{ __('Target Groups') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
