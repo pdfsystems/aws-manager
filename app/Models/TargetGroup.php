@@ -32,7 +32,7 @@ class TargetGroup extends Model implements HasFluxVariant
 
     public function isHealthy(): bool
     {
-        return $this->targets()->where('state', '!=', TargetState::Healthy)->doesntExist();
+        return $this->targets()->where('state', '=', TargetState::Healthy)->exists();
     }
 
     public function getFluxVariant(): string
