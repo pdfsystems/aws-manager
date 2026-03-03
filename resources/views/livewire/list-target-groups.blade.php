@@ -1,5 +1,5 @@
 <div>
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         @foreach($this->targetGroups as $group)
             <flux:callout :heading="$group->name" :variant="$group->getFluxVariant()">
                 <ul class="space-y-2">
