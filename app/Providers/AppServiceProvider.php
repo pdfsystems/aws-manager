@@ -3,10 +3,13 @@
 namespace App\Providers;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Console\Events\CommandStarting;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Laravel\Nightwatch\Facades\Nightwatch;
 use Lorisleiva\Actions\Facades\Actions;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +32,17 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             Actions::registerCommands();
         }
+
+        // Configure nightwatch
+        Event::listen(function (CommandStarting $event) {
+            if (in_array($event->command, [
+                'horizon:status',
+                'horizon:snapshot',
+                'health:check',
+            ])) {
+                Nightwatch::dontSample();
+            }
+        });
     }
 
     /**

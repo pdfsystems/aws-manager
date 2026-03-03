@@ -1,0 +1,25 @@
+name: "${PROJECT_NAME:-aws}"
+services:
+  app:
+    image: "692057070962.dkr.ecr.us-east-1.amazonaws.com/aws-manager:${IMAGE_TAG:-latest}"
+    env_file: .env
+    ports:
+      - '${WEB_PORT:-80}:8000'
+    restart: unless-stopped
+  nightwatch:
+    image: "laravelphp/nightwatch-agent:v1"
+    environment:
+      - NIGHTWATCH_TOKEN=${NIGHTWATCH_TOKEN}
+    restart: unless-stopped
+  scheduler:
+    image: "692057070962.dkr.ecr.us-east-1.amazonaws.com/aws-manager:${IMAGE_TAG:-latest}"
+    env_file: .env
+    entrypoint: [ "php", "artisan", "schedule:work" ]
+    restart: unless-stopped
+  worker:
+    image: "692057070962.dkr.ecr.us-east-1.amazonaws.com/aws-manager:${IMAGE_TAG:-latest}"
+    env_file: .env
+    entrypoint: [ "php", "artisan", "horizon" ]
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "php", "artisan", "horizon:status" ]

@@ -3,8 +3,16 @@
 use App\Livewire\ListTargetGroups;
 use App\Models\TargetGroup;
 use Illuminate\Support\Facades\Route;
+use Laravel\Nightwatch\Http\Middleware\Sample;
+use Spatie\Health\Http\Controllers\HealthCheckJsonResultsController;
+use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', function () {
+    return redirect()->route('dashboard');
+})->name('home');
+
+Route::get('/health', HealthCheckResultsController::class)->name('health');
+Route::get('/health.json', HealthCheckJsonResultsController::class)->name('health.json')->middleware(Sample::never());
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
