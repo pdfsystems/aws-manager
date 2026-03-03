@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\TargetGroup;
+use Aws\ElasticLoadBalancingV2\ElasticLoadBalancingV2Client;
 use Aws\Laravel\AwsFacade;
 use Aws\Result;
 use Illuminate\Console\Command;
@@ -24,6 +25,7 @@ class SyncTargetGroups
         $client = AwsFacade::createElasticLoadBalancingV2();
 
         return $this->processTargetGroups(
+            $client,
             $client->describeTargetGroups()
         );
     }
@@ -45,20 +47,20 @@ class SyncTargetGroups
         $this->handle();
     }
 
-    private function processTargetGroups(Result $targetGroups): Collection
+    private function processTargetGroups(ElasticLoadBalancingV2Client $client, Result $targetGroups): Collection
     {
         if (! $targetGroups->hasKey('TargetGroups')) {
             throw new InvalidArgumentException('No target groups found');
         }
 
         return collect($targetGroups->get('TargetGroups'))->map(
-            fn (array $targetGroup) => $this->syncTargetGroup($targetGroup)
+            fn (array $targetGroup) => $this->syncTargetGroup($client, $targetGroup)
         );
     }
 
-    private function syncTargetGroup(array $targetGroup): TargetGroup
+    private function syncTargetGroup(ElasticLoadBalancingV2Client $client, array $targetGroup): TargetGroup
     {
-        return TargetGroup::firstOrCreate([
+        $result = TargetGroup::firstOrCreate([
             'arn' => $targetGroup['TargetGroupArn'],
         ], [
             'name' => $targetGroup['TargetGroupName'],
@@ -66,5 +68,23 @@ class SyncTargetGroups
             'protocol' => $targetGroup['Protocol'],
             'port' => $targetGroup['Port'],
         ]);
+
+        $health = $client->describeTargetHealth(['TargetGroupArn' => $result->arn]);
+        if ($health->hasKey('TargetHealthDescriptions')) {
+            $this->updateTargets($result, $health->get('TargetHealthDescriptions'));
+        }
+
+        return $result;
+    }
+
+    private function updateTargets(TargetGroup $targetGroup, array $health): void
+    {
+        foreach ($health as $target) {
+            $targetGroup->targets()->updateOrCreate([
+                'instance' => $target['Target']['Id'],
+            ], [
+                'state' => $target['TargetHealth']['State'],
+            ]);
+        }
     }
 }
