@@ -18,6 +18,8 @@ class ListTargetGroups extends Component
     #[Computed]
     public function targetGroups(): Collection
     {
-        return TargetGroup::all();
+        return TargetGroup::query()
+            ->with('targets.instance')
+            ->get();
     }
 }
