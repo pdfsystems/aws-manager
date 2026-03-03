@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
-
 use Illuminate\Support\Str;
+
 use function Laravel\Prompts\text;
 
 class CreateUserCommand extends Command
@@ -26,7 +26,7 @@ class CreateUserCommand extends Command
             'password' => bcrypt($password),
         ]);
 
-        $this->info("User created successfully!");
+        $this->info('User created successfully!');
         $this->info("Generated password: $password");
     }
 }
