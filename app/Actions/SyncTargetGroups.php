@@ -81,7 +81,7 @@ class SyncTargetGroups
     {
         foreach ($health as $target) {
             $targetGroup->targets()->updateOrCreate([
-                'instance' => $target['Target']['Id'],
+                'instance_id' => $target['Target']['Id'],
             ], [
                 'state' => $target['TargetHealth']['State'],
             ]);

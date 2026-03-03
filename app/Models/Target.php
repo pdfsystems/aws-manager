@@ -15,7 +15,7 @@ class Target extends Model implements HasColor, HasIcon
 
     protected $fillable = [
         'target_group_id',
-        'instance',
+        'instance_id',
         'state',
     ];
 
@@ -26,6 +26,16 @@ class Target extends Model implements HasColor, HasIcon
     public function targetGroup(): BelongsTo
     {
         return $this->belongsTo(TargetGroup::class);
+    }
+
+    public function instance(): BelongsTo
+    {
+        return $this->belongsTo(Instance::class);
+    }
+
+    public function getInstanceName(): string
+    {
+        return $this->instance?->name ?: $this->instance_id;
     }
 
     public function getIcon(): ?string

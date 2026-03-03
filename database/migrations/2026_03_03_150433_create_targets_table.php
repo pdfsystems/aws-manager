@@ -12,11 +12,11 @@ return new class extends Migration
         Schema::create('targets', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(TargetGroup::class)->constrained()->cascadeOnDelete();
-            $table->string('instance');
+            $table->string('instance_id');
             $table->string('state')->index();
             $table->timestamps();
 
-            $table->unique(['instance', 'target_group_id']);
+            $table->unique(['instance_id', 'target_group_id']);
         });
     }
 
