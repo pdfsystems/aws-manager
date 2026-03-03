@@ -20,7 +20,7 @@
 
                 <!-- Load Balancing -->
                 <flux:sidebar.group :heading="__('Load Balancing')" class="grid">
-                    <flux:sidebar.item icon="target" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    <flux:sidebar.item icon="target" :href="route('target-groups.index')" :current="request()->routeIs('target-groups.index')" wire:navigate>
                         {{ __('Target Groups') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
