@@ -5,10 +5,13 @@ namespace App\Models;
 use App\Contracts\HasColor;
 use App\Contracts\HasIcon;
 use App\Enums\TargetState;
+use App\Observers\TargetObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[ObservedBy([TargetObserver::class])]
 class Target extends Model implements HasColor, HasIcon
 {
     use HasFactory;
