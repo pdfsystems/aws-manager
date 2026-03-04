@@ -20,6 +20,7 @@ class Instance extends Model implements Auditable, HasFluxVariant
     protected $fillable = [
         'id',
         'name',
+        'display_name',
         'architecture',
         'type',
         'cpu_cores',

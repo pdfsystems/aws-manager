@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\EditInstance;
 use App\Livewire\ListIncidents;
 use App\Livewire\ListInstances;
 use App\Livewire\ListTargetGroups;
@@ -23,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('target-groups', ListTargetGroups::class)->name('target-groups.index')->middleware('can:viewAny,'.TargetGroup::class);
     Route::livewire('incidents', ListIncidents::class)->name('incidents.index')->middleware('can:viewAny,'.Incident::class);
     Route::livewire('instances', ListInstances::class)->name('instances.index')->middleware('can:viewAny,'.Instance::class);
+    Route::livewire('instances/{instance}', EditInstance::class)->name('instances.edit')->middleware('can:update,instance');
 });
 
 require __DIR__.'/settings.php';
