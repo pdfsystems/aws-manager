@@ -1,6 +1,12 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
     @foreach($this->instances as $instance)
         <flux:callout :heading="$instance->name" :variant="$instance->getFluxVariant()">
+            <!-- Type -->
+            <div class="flex flex-row items-center space-x-1">
+                <flux:icon name="server" class="mr-2"></flux:icon>
+                <flux:callout.text>{{ $instance->type }}</flux:callout.text>
+            </div>
+
             <!-- CPU Info -->
             <div class="flex flex-row items-center space-x-1">
                 <flux:icon name="cpu-chip" class="mr-2"></flux:icon>
