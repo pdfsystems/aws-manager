@@ -2,6 +2,10 @@
 
 All notable changes to `pdfsystems/aws-manager` will be documented in this file.
 
+## 1.1.0 - 2026-03-04
+
+Add incident tracking
+
 ## 1.0.2 - 2026-03-03
 
 Performance optimization
