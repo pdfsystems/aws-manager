@@ -15,7 +15,7 @@ class EditInstance extends Component
     public Instance $instance;
 
     #[Validate(['nullable', 'string'])]
-    public ?string $display_name = '';
+    public ?string $display_name = null;
 
     public function mount(): void
     {

@@ -17,6 +17,7 @@ class TargetGroup extends Model implements Auditable, HasFluxVariant
 
     protected $fillable = [
         'name',
+        'display_name',
         'arn',
         'vpc',
         'protocol',
