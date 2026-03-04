@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('tags')->nullable();
             $table->timestamps();
 
-            $table->index([$morphPrefix.'_id', $morphPrefix.'_type']);
+            $table->index([$morphPrefix.'_type', $morphPrefix.'_id']);
         });
     }
 
