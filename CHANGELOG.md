@@ -2,6 +2,10 @@
 
 All notable changes to `pdfsystems/aws-manager` will be documented in this file.
 
+## 1.3.1 - 2026-03-04
+
+Use display names for targets
+
 ## 1.3.0 - 2026-03-04
 
 - Added display names for instances and target groups
