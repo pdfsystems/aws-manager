@@ -25,10 +25,10 @@ test('profile information can be updated', function () {
 
     $user->refresh();
 
-    expect($user->name)->toEqual('Test User');
-    expect($user->email)->toEqual('test@example.com');
-    expect($user->email_verified_at)->toBeNull();
-    expect($user->timezone)->toEqual('America/New_York');
+    expect($user->name)->toEqual('Test User')
+        ->and($user->email)->toEqual('test@example.com')
+        ->and($user->email_verified_at)->toBeNull()
+        ->and($user->timezone)->toEqual('America/New_York');
 });
 
 test('email verification status is unchanged when email address is unchanged', function () {
@@ -59,8 +59,8 @@ test('user can delete their account', function () {
         ->assertHasNoErrors()
         ->assertRedirect('/');
 
-    expect($user->fresh())->toBeNull();
-    expect(auth()->check())->toBeFalse();
+    expect($user->fresh())->toBeNull()
+        ->and(auth()->check())->toBeFalse();
 });
 
 test('correct password must be provided to delete account', function () {
