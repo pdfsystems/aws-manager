@@ -60,4 +60,9 @@ class Target extends Model implements Auditable, HasColor, HasIcon
             default => 'gray',
         };
     }
+
+    public function generateTags(): array
+    {
+        return $this->isDirty('state') ? ['health'] : [];
+    }
 }
