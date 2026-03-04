@@ -2,6 +2,11 @@
 
 All notable changes to `pdfsystems/aws-manager` will be documented in this file.
 
+## 1.3.0 - 2026-03-04
+
+- Added display names for instances and target groups
+- Updated theme
+
 ## 1.2.0 - 2026-03-04
 
 Add instance UI
