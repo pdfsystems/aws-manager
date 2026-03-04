@@ -8,8 +8,10 @@ use Aws\Result;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use InvalidArgumentException;
 use Lorisleiva\Actions\Concerns\AsAction;
+use RuntimeException;
 
 class SyncInstances
 {
@@ -76,6 +78,9 @@ class SyncInstances
             'name' => $this->extractTag($instance, 'Name', $instance['InstanceId']),
             'state' => $instance['State']['Name'],
             'architecture' => $instance['Architecture'],
+            'type' => $instance['InstanceType'],
+            'cpu_cores' => $instance['CpuOptions']['CoreCount'],
+            'memory_bytes' => $this->getTotalMemoryForInstanceType($instance['InstanceType']),
         ]);
     }
 
@@ -92,5 +97,23 @@ class SyncInstances
         }
 
         return $default;
+    }
+
+    private function getTotalMemoryForInstanceType(string $instanceType): int
+    {
+        try {
+            return Cache::rememberForever("instance-type-$instanceType-memory", function () use ($instanceType) {
+                $client = AwsFacade::createEc2();
+                $result = $client->describeInstanceTypes(['InstanceTypes' => [$instanceType]]);
+
+                if (! $result->hasKey('InstanceTypes')) {
+                    throw new InvalidArgumentException("Unknown instance type: $instanceType");
+                }
+
+                return ($result['InstanceTypes'][0]['MemoryInfo']['SizeInMiB'] ?? 0) * pow(1024, 2);
+            });
+        } catch (RuntimeException) {
+            return 0;
+        }
     }
 }

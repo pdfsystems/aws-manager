@@ -21,10 +21,14 @@ class Instance extends Model implements Auditable, HasFluxVariant
         'id',
         'name',
         'architecture',
+        'type',
+        'cpu_cores',
+        'memory_bytes',
         'state',
     ];
 
     protected $casts = [
+        'cpu_cores' => 'integer',
         'state' => InstanceState::class,
     ];
 
