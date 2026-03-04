@@ -25,6 +25,7 @@
         "livewire/flux-pro": "*",
         "livewire/livewire": "^4.0",
         "lorisleiva/laravel-actions": "^2.9",
+        "owen-it/laravel-auditing": "^14.0",
         "spatie/laravel-health": "^1.39"
     },
     "require-dev": {

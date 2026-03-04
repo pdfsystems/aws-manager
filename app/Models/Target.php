@@ -10,11 +10,13 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Contracts\Auditable;
 
 #[ObservedBy([TargetObserver::class])]
-class Target extends Model implements HasColor, HasIcon
+class Target extends Model implements Auditable, HasColor, HasIcon
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'target_group_id',

@@ -6,10 +6,11 @@ use App\Enums\InstanceState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Instance extends Model
+class Instance extends Model implements Auditable
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, \OwenIt\Auditing\Auditable, SoftDeletes;
 
     protected $keyType = 'string';
 
