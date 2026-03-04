@@ -60,7 +60,7 @@ class SyncTargetGroups
 
     private function syncTargetGroup(ElasticLoadBalancingV2Client $client, array $targetGroup): TargetGroup
     {
-        $result = TargetGroup::firstOrCreate([
+        $result = TargetGroup::updateOrCreate([
             'arn' => $targetGroup['TargetGroupArn'],
         ], [
             'name' => $targetGroup['TargetGroupName'],
