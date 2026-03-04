@@ -9,7 +9,7 @@
             @foreach($incidents as $incident)
                 <flux:table.row>
                     <flux:table.cell>{{ $incident->source_description }}</flux:table.cell>
-                    <flux:table.cell>{{ $incident->created_at->format('F j, Y g:ia') }}</flux:table.cell>
+                    <flux:table.cell>{{ auth()->user()->formatDate($incident->created_at, 'F j, Y g:ia') }}</flux:table.cell>
                     <flux:table.cell>
                         @if($incident->trashed())
                             {{ $incident->duration }}

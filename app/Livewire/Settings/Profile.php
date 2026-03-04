@@ -19,6 +19,8 @@ class Profile extends Component
 
     public string $email = '';
 
+    public string $timezone = '';
+
     /**
      * Mount the component.
      */
@@ -26,6 +28,7 @@ class Profile extends Component
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->timezone = Auth::user()->timezone;
     }
 
     /**
@@ -77,5 +80,14 @@ class Profile extends Component
     {
         return ! Auth::user() instanceof MustVerifyEmail
             || (Auth::user() instanceof MustVerifyEmail && Auth::user()->hasVerifiedEmail());
+    }
+
+    /**
+     * @return string[]
+     */
+    #[Computed]
+    public function timezones(): array
+    {
+        return timezone_identifiers_list();
     }
 }

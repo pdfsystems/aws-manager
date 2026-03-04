@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +14,7 @@ use NotificationChannels\Pushover\PushoverReceiver;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, TwoFactorAuthenticatable;
 
     /**
@@ -24,6 +26,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'timezone',
+        'pushover_key',
     ];
 
     /**
@@ -61,6 +65,11 @@ class User extends Authenticatable
             ->take(2)
             ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
+    }
+
+    public function formatDate(Carbon|CarbonImmutable $date, string $format): string
+    {
+        return $date->setTimezone($this->timezone)->format($format);
     }
 
     public function routeNotificationForPushover(): PushoverReceiver
