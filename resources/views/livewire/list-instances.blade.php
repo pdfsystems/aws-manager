@@ -3,13 +3,13 @@
         <flux:callout :heading="$instance->name" :variant="$instance->getFluxVariant()">
             <!-- Type -->
             <div class="flex flex-row items-center space-x-1">
-                <flux:icon name="server" class="mr-2"></flux:icon>
+                <flux:icon name="server" class="size-5 mr-2"></flux:icon>
                 <flux:callout.text>{{ $instance->type }}</flux:callout.text>
             </div>
 
             <!-- CPU Info -->
             <div class="flex flex-row items-center space-x-1">
-                <flux:icon name="cpu-chip" class="mr-2"></flux:icon>
+                <flux:icon name="cpu-chip" class="size-5 mr-2"></flux:icon>
                 <flux:callout.text>{{ $instance->cpu_cores }}</flux:callout.text>
                 <flux:callout.text>&times;</flux:callout.text>
                 <flux:callout.text>{{ $instance->architecture }}</flux:callout.text>
@@ -17,7 +17,7 @@
 
             <!-- Memory Info -->
             <div class="flex flex-row items-center space-x-1">
-                <flux:icon name="memory-stick" class="mr-2"></flux:icon>
+                <flux:icon name="memory-stick" class="size-5 mr-2"></flux:icon>
                 <flux:callout.text>{{ \Illuminate\Support\Number::fileSize($instance->memory_bytes) }}</flux:callout.text>
             </div>
         </flux:callout>
