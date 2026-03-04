@@ -47,7 +47,11 @@ class Target extends Model implements Auditable, HasColor, HasIcon, IncidentSour
 
     public function getInstanceName(): string
     {
-        return $this->instance?->name ?: $this->instance_id;
+        if (! is_null($this->instance)) {
+            return $this->instance->display_name ?: $this->instance->name;
+        } else {
+            return $this->instance_id;
+        }
     }
 
     public function getIcon(): ?string
