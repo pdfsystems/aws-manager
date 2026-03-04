@@ -1,6 +1,8 @@
 <?php
 
+use App\Livewire\ListIncidents;
 use App\Livewire\ListTargetGroups;
+use App\Models\Incident;
 use App\Models\TargetGroup;
 use Illuminate\Support\Facades\Route;
 use Laravel\Nightwatch\Http\Middleware\Sample;
@@ -17,6 +19,7 @@ Route::get('/health.json', HealthCheckJsonResultsController::class)->name('healt
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::livewire('target-groups', ListTargetGroups::class)->name('target-groups.index')->middleware('can:viewAny,'.TargetGroup::class);
+    Route::livewire('incidents', ListIncidents::class)->name('incidents.index')->middleware('can:viewAny,'.Incident::class);
 });
 
 require __DIR__.'/settings.php';

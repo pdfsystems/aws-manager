@@ -16,6 +16,10 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="bell-alert" :href="route('incidents.index')" :current="request()->routeIs('incidents.index')" wire:navigate>
+                        {{ __('Incidents') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
 
                 <!-- Load Balancing -->

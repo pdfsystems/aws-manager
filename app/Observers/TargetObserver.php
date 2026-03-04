@@ -18,8 +18,12 @@ class TargetObserver
 
             if ($target->state === TargetState::Unhealthy) {
                 Notification::send($users, new UnhealthyTargetNotification($target));
+
+                $target->incidents()->create();
             } elseif ($target->state === TargetState::Healthy) {
                 Notification::send($users, new HealthyTargetNotification($target));
+
+                $target->incidents()->orderByDesc('created_at')->first()?->delete();
             }
         }
     }
