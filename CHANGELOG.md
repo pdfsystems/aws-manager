@@ -2,6 +2,10 @@
 
 All notable changes to `pdfsystems/aws-manager` will be documented in this file.
 
+## 1.3.5 - 2026-03-20
+
+- Sync target removals
+
 ## 1.3.4 - 2026-03-20
 
 - Update dependencies
