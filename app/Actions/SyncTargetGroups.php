@@ -86,5 +86,7 @@ class SyncTargetGroups
                 'state' => $target['TargetHealth']['State'],
             ]);
         }
+
+        $targetGroup->targets()->whereNotIn('instance_id', collect($health)->pluck('Target.Id'))->delete();
     }
 }
