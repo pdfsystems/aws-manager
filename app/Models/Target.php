@@ -59,6 +59,7 @@ class Target extends Model implements Auditable, HasColor, HasIcon, IncidentSour
         return match ($this->state) {
             TargetState::Healthy => 'check-circle',
             TargetState::Unhealthy => 'x-circle',
+            TargetState::Draining => 'arrow-down',
             default => 'question-mark-circle',
         };
     }
@@ -66,8 +67,9 @@ class Target extends Model implements Auditable, HasColor, HasIcon, IncidentSour
     public function getColor(): ?string
     {
         return match ($this->state) {
-            TargetState::Healthy => 'green',
-            TargetState::Unhealthy => 'red',
+            TargetState::Healthy => 'text-green-500',
+            TargetState::Unhealthy => 'text-red-500',
+            TargetState::Draining => 'text-amber-500',
             default => 'gray',
         };
     }
