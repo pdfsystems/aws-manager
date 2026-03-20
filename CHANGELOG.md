@@ -2,6 +2,11 @@
 
 All notable changes to `pdfsystems/aws-manager` will be documented in this file.
 
+## 1.3.4 - 2026-03-20
+
+- Update dependencies
+- Set default target icon
+
 ## 1.3.3 - 2026-03-20
 
 Add `terminated` instance state
