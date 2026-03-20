@@ -1,5 +1,7 @@
 <?php
 
+use Spatie\Health\ResultStores\CacheHealthResultStore;
+
 return [
     /*
      * A result store is responsible for saving the results of the checks. The
@@ -7,7 +9,7 @@ return [
      * can use multiple stores at the same time.
      */
     'result_stores' => [
-        Spatie\Health\ResultStores\CacheHealthResultStore::class => [
+        CacheHealthResultStore::class => [
             'store' => 'redis',
             'cacheKey' => 'health.results.'.env('SERVER_HOSTNAME', 'main'),
         ],

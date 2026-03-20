@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\EditInstance;
+use App\Livewire\EditTargetGroup;
 use App\Livewire\ListIncidents;
 use App\Livewire\ListInstances;
 use App\Livewire\ListTargetGroups;
@@ -22,7 +23,7 @@ Route::get('/health.json', HealthCheckJsonResultsController::class)->name('healt
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::livewire('target-groups', ListTargetGroups::class)->name('target-groups.index')->middleware('can:viewAny,'.TargetGroup::class);
-    Route::livewire('target-groups/{group}', \App\Livewire\EditTargetGroup::class)->name('target-groups.edit')->middleware('can:update,group');
+    Route::livewire('target-groups/{group}', EditTargetGroup::class)->name('target-groups.edit')->middleware('can:update,group');
     Route::livewire('incidents', ListIncidents::class)->name('incidents.index')->middleware('can:viewAny,'.Incident::class);
     Route::livewire('instances', ListInstances::class)->name('instances.index')->middleware('can:viewAny,'.Instance::class);
     Route::livewire('instances/{instance}', EditInstance::class)->name('instances.edit')->middleware('can:update,instance');
