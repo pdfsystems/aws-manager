@@ -4,5 +4,5 @@ namespace App\Contracts;
 
 interface HasIcon
 {
-    public function getIcon(): ?string;
+    public function getIcon(): string;
 }

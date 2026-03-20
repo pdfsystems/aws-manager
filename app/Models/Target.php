@@ -54,12 +54,12 @@ class Target extends Model implements Auditable, HasColor, HasIcon, IncidentSour
         }
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return match ($this->state) {
             TargetState::Healthy => 'check-circle',
             TargetState::Unhealthy => 'x-circle',
-            default => null,
+            default => 'question-mark-circle',
         };
     }
 
