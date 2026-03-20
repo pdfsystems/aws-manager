@@ -2,6 +2,10 @@
 
 All notable changes to `pdfsystems/aws-manager` will be documented in this file.
 
+## 1.3.2 - 2026-03-20
+
+Added `initial` and `draining` target states
+
 ## 1.3.1 - 2026-03-04
 
 Use display names for targets
