@@ -8,4 +8,5 @@ enum TargetState: string
     case Unhealthy = 'unhealthy';
     case Initial = 'initial';
     case Draining = 'draining';
+    case Unused = 'unused';
 }
