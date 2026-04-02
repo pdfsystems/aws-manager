@@ -14,8 +14,8 @@ use OwenIt\Auditing\Contracts\Auditable;
 class TargetGroup extends Model implements Auditable, HasFluxVariant
 {
     use HasFactory;
-    use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
