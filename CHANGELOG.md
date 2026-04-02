@@ -2,6 +2,11 @@
 
 All notable changes to `pdfsystems/aws-manager` will be documented in this file.
 
+## 1.3.6 - 2026-04-02
+
+- Add `SoftDeletes` to `TargetGroup`
+- Add `unused` target state
+
 ## 1.3.5 - 2026-03-20
 
 - Sync target removals
